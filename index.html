@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="version" content="1.1" />
   <title>Münchow Studio — Fotografia de Casamento</title>
   <meta name="description" content="Fotografia documental de casamento. Brasil e exterior. Jeff Münchow observa mais e interfere menos — porque as memórias verdadeiras vêm dos gestos que ninguém ensaiou." />
   <meta property="og:title" content="Münchow Studio" />
@@ -88,9 +89,11 @@
       font-size: 17px;
       font-weight: 400;
       letter-spacing: 0.04em;
-      color: var(--slate);
+      color: var(--cream);
       text-decoration: none;
+      transition: color 0.4s;
     }
+    nav.scrolled .nav-logo { color: var(--slate); }
     .nav-links {
       display: flex;
       align-items: center;
@@ -102,20 +105,26 @@
       font-weight: 400;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--olive-mid);
+      color: rgba(237,232,222,0.75);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--slate); }
+    nav.scrolled .nav-links a { color: var(--olive-mid); }
+    .nav-links a:hover { color: var(--cream); }
+    nav.scrolled .nav-links a:hover { color: var(--slate); }
     .nav-cta {
-      border: 1px solid rgba(63,60,42,0.35) !important;
+      border: 1px solid rgba(237,232,222,0.4) !important;
       padding: 10px 22px !important;
+      color: var(--cream) !important;
+      transition: background 0.2s, color 0.2s, border-color 0.4s !important;
+    }
+    nav.scrolled .nav-cta {
+      border-color: rgba(63,60,42,0.35) !important;
       color: var(--slate) !important;
-      transition: background 0.2s, color 0.2s !important;
     }
     .nav-cta:hover {
-      background: var(--slate) !important;
-      color: var(--bg) !important;
+      background: var(--cream) !important;
+      color: var(--slate) !important;
     }
 
     /* HERO */
@@ -123,8 +132,6 @@
       position: relative;
       height: 100svh;
       min-height: 640px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       overflow: hidden;
     }
     .hero-left {
@@ -133,20 +140,16 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 64px 80px 56px;
+      padding: 0 56px 80px 56px;
+      height: 100%;
     }
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
+    .hero-right { display: none; }
     .hero-img {
       position: absolute;
       inset: 0;
-      background: linear-gradient(145deg, #4a4535 0%, #2a2519 45%, #1c1a16 75%, #3d3020 100%);
-      /* SUBSTITUA PELO SEU CLOUDINARY:
-         background-image: url('https://res.cloudinary.com/SEU_CLOUD/image/upload/...');
-         background-size: cover;
-         background-position: center; */
+      background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776352159/_A7R0235_mlgvx6.jpg');
+      background-size: cover;
+      background-position: center top;
       transform: scale(1.04);
       animation: slowzoom 22s ease-in-out infinite alternate;
     }
@@ -154,7 +157,12 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 28%);
+      background: linear-gradient(
+        to top,
+        rgba(28,26,22,0.82) 0%,
+        rgba(28,26,22,0.35) 45%,
+        rgba(28,26,22,0.1) 100%
+      );
     }
     @keyframes slowzoom {
       from { transform: scale(1.04); }
@@ -176,18 +184,18 @@
       font-weight: 400;
       line-height: 1.0;
       letter-spacing: -0.01em;
-      color: var(--slate);
+      color: var(--cream);
       margin-bottom: 30px;
       opacity: 0;
       animation: fup 1s 0.65s forwards;
     }
-    .hero-title em { font-style: italic; color: var(--olive); }
+    .hero-title em { font-style: italic; color: var(--burlap); }
     .hero-sub {
       font-size: 13px;
       font-weight: 300;
       line-height: 1.85;
-      color: var(--olive-mid);
-      max-width: 360px;
+      color: rgba(237,232,222,0.7);
+      max-width: 420px;
       letter-spacing: 0.02em;
       margin-bottom: 44px;
       opacity: 0;

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Münchow Studio — Fotografia de Casamento</title>
+  <meta name="description" content="Fotografia documental de casamento. Brasil e exterior. Jeff Münchow observa mais e interfere menos — porque as memórias verdadeiras vêm dos gestos que ninguém ensaiou." />
+  <meta property="og:title" content="Münchow Studio" />
+  <meta property="og:description" content="Fotografia documental de casamento. Brasil e exterior." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://munchow.studio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --olive:     #3d3c2a;
+      --olive-mid: #5a5940;
+      --burlap:    #bfaf94;
+      --cream:     #ede8de;
+      --cream-dark:#e0d9cc;
+      --cinnamon:  #7b4f2e;
+      --slate:     #1c1a16;
+      --bg:        #f0ebe0;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Jost', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--slate);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      animation: grain 0.35s steps(1) infinite;
+    }
+
+    @keyframes grain {
+      0%   { transform: translate(0,0); }
+      25%  { transform: translate(-3%,4%); }
+      50%  { transform: translate(4%,-2%); }
+      75%  { transform: translate(-2%,-4%); }
+      100% { transform: translate(3%,2%); }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 56px;
+      transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      padding: 20px 56px;
+      background: rgba(240,235,224,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(63,60,42,0.1);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 44px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--slate); }
+    .nav-cta {
+      border: 1px solid rgba(63,60,42,0.35) !important;
+      padding: 10px 22px !important;
+      color: var(--slate) !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--slate) !important;
+      color: var(--bg) !important;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 640px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-left {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 80px 56px;
+    }
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #4a4535 0%, #2a2519 45%, #1c1a16 75%, #3d3020 100%);
+      /* SUBSTITUA PELO SEU CLOUDINARY:
+         background-image: url('https://res.cloudinary.com/SEU_CLOUD/image/upload/...');
+         background-size: cover;
+         background-position: center; */
+      transform: scale(1.04);
+      animation: slowzoom 22s ease-in-out infinite alternate;
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 28%);
+    }
+    @keyframes slowzoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.00); }
+    }
+    .hero-eyebrow {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fup 1s 0.4s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(46px, 5.6vw, 88px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--slate);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fup 1s 0.65s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--olive); }
+    .hero-sub {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--olive-mid);
+      max-width: 360px;
+      letter-spacing: 0.02em;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fup 1s 0.85s forwards;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      opacity: 0;
+      animation: fup 1s 1.05s forwards;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--slate);
+      text-decoration: none;
+      padding: 15px 30px;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--olive); }
+    .btn-ghost {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--burlap);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--slate); border-color: var(--slate); }
+    .hero-meta {
+      position: absolute;
+      bottom: 40px;
+      right: 36px;
+      z-index: 3;
+      text-align: right;
+      opacity: 0;
+      animation: fin 1s 1.5s forwards;
+    }
+    .hero-meta span {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(240,235,224,0.55);
+      margin-bottom: 5px;
+    }
+    .hero-scrollbar {
+      position: absolute;
+      bottom: 0;
+      left: 56px;
+      width: 1px;
+      height: 64px;
+      background: linear-gradient(to bottom, transparent, var(--burlap));
+      z-index: 2;
+      opacity: 0;
+      animation: fin 1s 1.8s forwards;
+    }
+    @keyframes fup {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fin {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent 5%, rgba(63,60,42,0.12) 30%, rgba(63,60,42,0.12) 70%, transparent 95%);
+    }
+
+    /* STATEMENT */
+    .statement {
+      padding: 128px 56px;
+      display: flex;
+      align-items: flex-start;
+      gap: 72px;
+    }
+    .statement-label {
+      flex-shrink: 0;
+      padding-top: 8px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--burlap);
+    }
+    .statement-text {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.8vw, 54px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--slate);
+    }
+    .statement-text em { font-style: italic; color: var(--olive); }
+    .statement-caption {
+      margin-top: 40px;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      line-height: 1.85;
+      color: var(--burlap);
+      border-left: 1px solid rgba(191,175,148,0.4);
+      padding-left: 20px;
+      max-width: 380px;
+    }
+
+    /* WORK */
+    .work { padding: 112px 56px; }
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+    .section-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.8vw, 40px);
+      font-weight: 400;
+      color: var(--slate);
+    }
+    .work-viewall {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(191,175,148,0.5);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .work-viewall:hover { color: var(--slate); border-color: var(--slate); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .work-item:nth-child(1) { grid-column: 1 / 8;  aspect-ratio: 16/10; }
+    .work-item:nth-child(2) { grid-column: 8 / 13; aspect-ratio: 3/4; }
+    .work-item:nth-child(3) { grid-column: 1 / 5;  aspect-ratio: 4/5; }
+    .work-item:nth-child(4) { grid-column: 5 / 10; aspect-ratio: 16/10; }
+    .work-item:nth-child(5) { grid-column: 10 / 13;aspect-ratio: 3/4; }
+
+    .work-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    /* Placeholder gradients — substitua por background-image: url('URL') em cada .work-bg */
+    .work-item:nth-child(1) .work-bg { background-color: #3a3825; }
+    .work-item:nth-child(2) .work-bg { background-color: #2a2116; }
+    .work-item:nth-child(3) .work-bg { background-color: #1e1c16; }
+    .work-item:nth-child(4) .work-bg { background-color: #4a3828; }
+    .work-item:nth-child(5) .work-bg { background-color: #322e20; }
+
+    .work-item:hover .work-bg { transform: scale(1.05); }
+
+    .work-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 48px 22px 22px;
+      background: linear-gradient(to top, rgba(28,26,22,0.88) 0%, transparent 100%);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .work-item:hover .work-info { opacity: 1; transform: translateY(0); }
+    .work-location {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 4px;
+    }
+    .work-name {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--slate);
+      padding: 22px 0;
+    }
+    .marquee-track {
+      display: flex;
+      animation: marquee 32s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 0 28px;
+      flex-shrink: 0;
+    }
+    .marquee-text {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(237,232,222,0.75);
+      letter-spacing: 0.01em;
+    }
+    .marquee-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--burlap);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* APPROACH */
+    .approach {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .approach-img-col {
+      position: relative;
+      min-height: 480px;
+    }
+    .approach-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, #c8c0b0 0%, #a89e8c 40%, #8a7e6e 100%);
+      /* SUBSTITUA: background-image: url('URL_CLOUDINARY'); background-size: cover; */
+    }
+    .approach-panel {
+      background: var(--slate);
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .approach-eyebrow {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 28px;
+    }
+    .approach-title {
+      font-family: var(--serif);
+      font-size: clamp(30px, 3.2vw, 48px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+    .approach-title em { font-style: italic; color: var(--burlap); }
+    .approach-text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(224,217,204,0.65);
+      margin-bottom: 14px;
+      max-width: 400px;
+    }
+    .approach-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 44px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(191,175,148,0.12);
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--burlap);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(191,175,148,0.5);
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 128px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(145deg, #4a4535 0%, #2a2519 50%, #1c1a16 100%);
+      display: block;
+      /* SUBSTITUA: background-image: url('SUA_FOTO'); background-size: cover; */
+    }
+    .about-tag {
+      position: absolute;
+      bottom: -18px;
+      right: -18px;
+      background: var(--cream-dark);
+      border: 1px solid rgba(63,60,42,0.1);
+      padding: 18px 22px;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+    }
+    .about-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 22px;
+    }
+    .about-title {
+      font-family: var(--serif);
+      font-size: clamp(30px, 3vw, 48px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--slate);
+      margin-bottom: 28px;
+    }
+    .about-title em { font-style: italic; color: var(--olive); }
+    .about-text {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--olive-mid);
+      margin-bottom: 16px;
+    }
+    .about-sig {
+      margin-top: 36px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--slate);
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 128px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .contact-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 22px;
+    }
+    .contact-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--slate);
+      margin-bottom: 22px;
+    }
+    .contact-title em { font-style: italic; color: var(--olive); }
+    .contact-sub {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--olive-mid);
+      margin-bottom: 44px;
+      max-width: 340px;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .detail-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 3px;
+    }
+    .detail-val {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--slate);
+    }
+    .detail-val a {
+      color: var(--slate);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(63,60,42,0.18);
+      transition: border-color 0.2s;
+    }
+    .detail-val a:hover { border-color: var(--olive); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--burlap);
+    }
+    .form-input,
+    .form-textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(63,60,42,0.18);
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--slate);
+      outline: none;
+      transition: border-color 0.25s;
+      resize: none;
+      width: 100%;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(191,175,148,0.7);
+    }
+    .form-input:focus,
+    .form-textarea:focus {
+      border-bottom-color: var(--olive);
+    }
+    .form-textarea { min-height: 96px; }
+    .form-submit {
+      margin-top: 6px;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--slate);
+      border: none;
+      padding: 15px 30px;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .form-submit:hover { background: var(--olive); }
+    .form-submit svg { width: 13px; height: 13px; transition: transform 0.2s; }
+    .form-submit:hover svg { transform: translateX(4px); }
+
+    /* FOOTER */
+    footer {
+      padding: 44px 56px;
+      border-top: 1px solid rgba(63,60,42,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--burlap);
+    }
+    .footer-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .footer-nav a {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--slate); }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 860px) {
+      nav { padding: 22px 24px; }
+      nav.scrolled { padding: 16px 24px; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 100px 24px 64px; }
+      .hero-scrollbar { left: 24px; }
+
+      .statement { padding: 72px 24px; flex-direction: column; gap: 28px; }
+      .statement-label { writing-mode: horizontal-tb; transform: none; }
+
+      .work { padding: 72px 24px; }
+      .work-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .work-item { grid-column: auto !important; aspect-ratio: 1 !important; }
+
+      .approach { grid-template-columns: 1fr; }
+      .approach-img-col { min-height: 280px; }
+      .approach-panel { padding: 56px 24px; }
+
+      .about { grid-template-columns: 1fr; gap: 56px; padding: 72px 24px; }
+      .about-tag { right: 0; }
+
+      .contact { grid-template-columns: 1fr; gap: 56px; padding: 72px 24px; }
+      .form-row { grid-template-columns: 1fr; gap: 24px; }
+
+      footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
+      .footer-nav { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="nav-logo">Münchow Studio</a>
+    <ul class="nav-links">
+      <li><a href="#trabalho">Trabalho</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato" class="nav-cta">Agendar</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Fotografia Documental — Brasil &amp; Exterior</p>
+      <h1 class="hero-title">
+        Observando<br>mais.<br><em>Interferindo</em><br>menos.
+      </h1>
+      <p class="hero-sub">
+        As memórias verdadeiras vêm dos gestos que ninguém ensaiou. Jeff Münchow documenta casamentos por todo o Brasil e além — sem roteiro, sem interferência.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#contato" class="btn-primary">Agendar conversa</a>
+        <a href="#trabalho" class="btn-ghost">Ver trabalho</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- SUBSTITUA o fundo pelo seu Cloudinary:
+           <div class="hero-img" style="background-image:url('URL');background-size:cover;background-position:center;"></div>
+      -->
+      <div class="hero-img"></div>
+      <div class="hero-meta">
+        <span>15 anos de experiência</span>
+        <span>Brasil · Portugal · Destinos</span>
+      </div>
+    </div>
+    <div class="hero-scrollbar"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STATEMENT -->
+  <section class="statement reveal">
+    <span class="statement-label">Filosofia</span>
+    <div>
+      <p class="statement-text">
+        Cada casal tem uma forma única de estar junto. <em>Meu trabalho é descobrir essa forma</em> — não inventar uma.
+      </p>
+      <p class="statement-caption">
+        Fotografia documental especializada em registrar a experiência como ela é. Sem poses excessivas, sem direção invasiva. Só atenção e presença.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WORK -->
+  <section class="work" id="trabalho">
+    <div class="work-header reveal">
+      <div>
+        <p class="section-label">Portfólio</p>
+        <h2 class="section-title">Trabalho recente</h2>
+      </div>
+      <a href="#contato" class="work-viewall">Ver todos</a>
+    </div>
+
+    <div class="work-grid reveal">
+      <!--
+        Para adicionar fotos, coloque no estilo inline de cada .work-bg:
+        style="background-image: url('URL_CLOUDINARY'); background-size: cover; background-position: center;"
+      -->
+      <div class="work-item">
+        <div class="work-bg"></div>
+        <div class="work-info">
+          <p class="work-location">Porto Alegre, RS</p>
+          <p class="work-name">Ana &amp; Pedro</p>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-bg"></div>
+        <div class="work-info">
+          <p class="work-location">Serra Gaúcha, RS</p>
+          <p class="work-name">Luísa &amp; Marcos</p>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-bg"></div>
+        <div class="work-info">
+          <p class="work-location">São Paulo, SP</p>
+          <p class="work-name">Clara &amp; Rafael</p>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-bg"></div>
+        <div class="work-info">
+          <p class="work-location">Lisboa, Portugal</p>
+          <p class="work-name">Fernanda &amp; Lucas</p>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-bg"></div>
+        <div class="work-info">
+          <p class="work-location">Pelotas, RS</p>
+          <p class="work-name">Julia &amp; Bruno</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" aria-hidden="true">
+      <div class="marquee-item"><span class="marquee-text">Fotografia Documental</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Brasil &amp; Exterior</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Casamentos</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Destination Wedding</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">15 anos de experiência</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Fotografia Documental</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Brasil &amp; Exterior</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Casamentos</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">Destination Wedding</span><span class="marquee-dot"></span></div>
+      <div class="marquee-item"><span class="marquee-text">15 anos de experiência</span><span class="marquee-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <section class="approach" id="abordagem">
+    <div class="approach-img-col">
+      <!-- SUBSTITUA: adicione style="background-image:url('URL');background-size:cover;" no .approach-bg -->
+      <div class="approach-bg"></div>
+    </div>
+    <div class="approach-panel reveal">
+      <p class="approach-eyebrow">Como trabalho</p>
+      <h2 class="approach-title">
+        Como um <em>filme</em><br>que você vai<br>querer rever.
+      </h2>
+      <p class="approach-text">
+        Chego antes, fico por perto, interfiro o mínimo possível. Observo os gestos, os olhares, os momentos entre os momentos — as partes do dia que ninguém pede que você pose.
+      </p>
+      <p class="approach-text">
+        Trabalho sozinho, sem equipe. Isso não é limitação — é escolha. Menos gente, mais presença. Menos aparato, mais conexão.
+      </p>
+      <div class="approach-stats">
+        <div>
+          <p class="stat-num">15+</p>
+          <p class="stat-label">Anos documentando</p>
+        </div>
+        <div>
+          <p class="stat-num">Solo</p>
+          <p class="stat-label">Sempre presente</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre">
+    <div class="about-img-wrap reveal">
+      <!-- SUBSTITUA: adicione style="background-image:url('SUA_FOTO');background-size:cover;" no .about-photo -->
+      <div class="about-photo"></div>
+      <div class="about-tag">Jeff Münchow · Pelotas, RS</div>
+    </div>
+    <div class="reveal">
+      <p class="about-label">Sobre</p>
+      <h2 class="about-title">Fotógrafo.<br><em>Não encenador.</em></h2>
+      <p class="about-text">
+        Comecei a fotografar casamentos há mais de quinze anos — não porque era o mercado, mas porque era o lugar onde a vida acontecia de forma intensa e real ao mesmo tempo. Duas pessoas se escolhendo, rodeadas pelas que mais importam.
+      </p>
+      <p class="about-text">
+        Sou de Pelotas, mas o trabalho me levou pelo Brasil todo e para além das fronteiras. Não tenho equipe. Tenho atenção.
+      </p>
+      <p class="about-sig">Jeff Münchow</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contato">
+    <div class="reveal">
+      <p class="contact-label">Contato</p>
+      <h2 class="contact-title">
+        Vamos<br>conversar<br><em>sobre o seu</em><br>casamento.
+      </h2>
+      <p class="contact-sub">
+        Preencha o formulário ou entre em contato diretamente. Respondo pessoalmente — sem automações, sem assistentes.
+      </p>
+      <div class="contact-detail">
+        <div>
+          <p class="detail-label">Instagram</p>
+          <p class="detail-val"><a href="https://instagram.com/munchow.studio" target="_blank" rel="noopener">@munchow.studio</a></p>
+        </div>
+        <div>
+          <p class="detail-label">Localização</p>
+          <p class="detail-val">Pelotas, RS — Brasil &amp; Exterior</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulário via Formspree: crie conta em formspree.io e substitua SEU_ID -->
+    <form class="contact-form reveal" action="https://formspree.io/f/SEU_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="nome">Seu nome</label>
+          <input class="form-input" type="text" id="nome" name="nome" placeholder="Como você se chama?" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">E-mail</label>
+          <input class="form-input" type="email" id="email" name="_replyto" placeholder="seu@email.com" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="data">Data do casamento</label>
+          <input class="form-input" type="text" id="data" name="data" placeholder="Mês e ano" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="local">Local</label>
+          <input class="form-input" type="text" id="local" name="local" placeholder="Cidade ou destino" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="msg">Mensagem</label>
+        <textarea class="form-textarea" id="msg" name="message" placeholder="Conte um pouco sobre o que vocês estão planejando…"></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        Enviar mensagem
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="/" class="footer-logo">Münchow Studio</a>
+    <p class="footer-copy">© 2026 — Fotografia de Casamento</p>
+    <ul class="footer-nav">
+      <li><a href="#trabalho">Trabalho</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Stagger work items
+    document.querySelectorAll('.work-item').forEach((item, i) => {
+      item.style.transitionDelay = `${i * 0.07}s`;
+    });
+  </script>
+</body>
+</html>

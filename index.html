@@ -454,16 +454,17 @@
       min-height: 500px;
     }
     .approach-img-col {
-      position: relative;
-      height: 500px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
       overflow: hidden;
     }
     .approach-bg {
-      background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776372523/_0008237_vj57oj.jpg');
-      background-size: cover;
-      background-position: center top;
-      position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .approach-eyebrow {
       font-size: 9px;
@@ -897,7 +898,7 @@
       </p>
     </div>
     <div class="approach-img-col">
-      <div class="approach-bg"></div>
+      <img class="approach-bg" src="https://res.cloudinary.com/dptgycx3x/image/upload/v1776372523/_0008237_vj57oj.jpg" alt="Fotografia documental de casamento" />
     </div>
   </section>
 

@@ -445,26 +445,17 @@
 
     /* APPROACH */
     .approach {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 600px;
-    }
-    .approach-img-col {
-      position: relative;
-      min-height: 480px;
-    }
-    .approach-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg, #c8c0b0 0%, #a89e8c 40%, #8a7e6e 100%);
-      /* SUBSTITUA: background-image: url('URL_CLOUDINARY'); background-size: cover; */
-    }
-    .approach-panel {
       background: var(--slate);
-      padding: 80px 72px;
+      padding: 100px 56px;
+    }
+    .approach-img-col { display: none; }
+    .approach-panel {
+      background: transparent;
+      padding: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      max-width: 680px;
     }
     .approach-eyebrow {
       font-size: 9px;
@@ -900,16 +891,6 @@
       <p class="approach-text">
         Trabalho sozinho, sem equipe. Isso não é limitação — é escolha. Menos gente, mais presença. Menos aparato, mais conexão.
       </p>
-      <div class="approach-stats">
-        <div>
-          <p class="stat-num">15+</p>
-          <p class="stat-label">Anos documentando</p>
-        </div>
-        <div>
-          <p class="stat-num">Solo</p>
-          <p class="stat-label">Sempre presente</p>
-        </div>
-      </div>
     </div>
   </section>
 

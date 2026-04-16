@@ -446,26 +446,24 @@
     /* APPROACH */
     .approach {
       background: var(--slate);
-      padding: 50px 100px 50px 150px;
+      padding: 50px 0 50px 150px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
+      min-height: 500px;
     }
     .approach-img-col {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      align-self: start;
+      position: relative;
+      height: 500px;
       overflow: hidden;
     }
     .approach-bg {
       background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776372523/_0008237_vj57oj.jpg');
-      background-size: 100% auto;
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      width: 100%;
-      aspect-ratio: 2/3;
+      background-size: cover;
+      background-position: center top;
+      position: absolute;
+      inset: 0;
     }
     .approach-eyebrow {
       font-size: 9px;

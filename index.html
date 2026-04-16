@@ -446,16 +446,22 @@
     /* APPROACH */
     .approach {
       background: var(--slate);
-      padding: 100px 56px 100px 100px;
+      padding: 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
     }
-    .approach-img-col { display: none; }
-    .approach-panel {
-      background: transparent;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 680px;
+    .approach-img-col {
+      display: block;
+      position: relative;
+    }
+    .approach-bg {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background-size: cover;
+      background-position: center;
+      background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776372523/_0008237_vj57oj.jpg');
     }
     .approach-eyebrow {
       font-size: 9px;
@@ -876,10 +882,6 @@
 
   <!-- APPROACH -->
   <section class="approach" id="abordagem">
-    <div class="approach-img-col">
-      <!-- SUBSTITUA: adicione style="background-image:url('URL');background-size:cover;" no .approach-bg -->
-      <div class="approach-bg"></div>
-    </div>
     <div class="approach-panel reveal">
       <p class="approach-eyebrow">Como trabalho</p>
       <h2 class="approach-title">
@@ -891,6 +893,9 @@
       <p class="approach-text">
         Trabalho sozinho, sem equipe. Isso não é limitação — é escolha. Menos gente, mais presença. Menos aparato, mais conexão.
       </p>
+    </div>
+    <div class="approach-img-col">
+      <div class="approach-bg"></div>
     </div>
   </section>
 

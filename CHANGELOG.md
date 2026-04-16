@@ -1,5 +1,11 @@
 # Münchow Studio — Changelog
 
+## v0.1.2 — 16 abril 2026
+- Hero centralizado (texto, eyebrow, título, subtítulo e CTAs)
+- Título hero ajustado: "Observando mais. / Interferindo menos."
+- Logo "Münchow Studio" centralizado na nav
+- Links de navegação removidos do topo (Trabalho, Sobre, Agendar)
+
 ## v0.1.1 — 16 abril 2026
 - Corrigido posicionamento da foto hero (center bottom)
 - Corrigido bug onde hero-img estava dentro de div com display none

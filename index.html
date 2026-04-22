@@ -390,6 +390,31 @@
 
     .work-info { z-index: 2; }
 
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      background: rgba(28,26,22,0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .work-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .work-overlay-text {
+      font-family: 'Baskerville', 'Libre Baskerville', Georgia, serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(237,232,222,0.75);
+    }
+
     .work-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -932,29 +957,33 @@
         Para adicionar fotos, coloque no estilo inline de cada .work-bg:
         style="background-image: url('URL_CLOUDINARY'); background-size: cover; background-position: center;"
       -->
-      <div class="work-item" onclick="openLightbox()" style="cursor:pointer;">
+      <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776378861/_A7R9820_csyeot.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">LAURA&amp;DIEGO</p>
           <p class="work-location">Islândia</p>
         </div>
       </div>
-      <div class="work-item" onclick="openLightbox()" style="cursor:pointer;">
+      <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776882905/_0001267_s7zw0f.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">RAQUEL&amp;MICHI</p>
           <p class="work-location">Baviera, Alemanha</p>
         </div>
       </div>
-      <div class="work-item" onclick="openLightbox()" style="cursor:pointer;">
+      <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776884897/DasRu%CC%88ebezahl-20_xwsatk.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">FLORIAN&amp;KATJA</p>
           <p class="work-location">Schwangau, Alemanha</p>
         </div>
       </div>
-      <div class="work-item" onclick="openLightbox()" style="cursor:pointer;">
+      <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776883268/Cate-e-Louis-Wedding-669_jju22r.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">CATE&amp;LOUIS</p>
           <p class="work-location">Outeiro das Brisas, Bahia</p>
@@ -967,8 +996,9 @@
           <p class="work-location">Praia do Rosa, SC</p>
         </div>
       </div>
-      <div class="work-item" onclick="openLightbox()" style="cursor:pointer;">
+      <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776884265/Betina-e-Iason-Wedding-813_eiml3c.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">BETINA&amp;IASON</p>
           <p class="work-location">Missões, Rio Grande do Sul</p>
@@ -1078,16 +1108,6 @@
     </form>
   </section>
 
-  <!-- LIGHTBOX EM BREVE -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-box">
-      <p class="lightbox-eyebrow">Portfólio</p>
-      <h2 class="lightbox-title">Galeria em<br><em>construção.</em></h2>
-      <p class="lightbox-sub">Em breve as histórias completas estarão aqui. Enquanto isso, entre em contato — será um prazer conversar sobre o seu casamento.</p>
-      <button class="lightbox-close" onclick="closeLightbox()">Fechar</button>
-    </div>
-  </div>
-
   <!-- FOOTER -->
   <footer>
     <a href="/" class="footer-logo">
@@ -1122,21 +1142,10 @@
       item.style.transitionDelay = `${i * 0.07}s`;
     });
 
-    function openLightbox() {
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
+    function openLightbox(el) {
+      const overlay = el.querySelector('.work-overlay');
+      if (overlay) overlay.classList.add('visible');
     }
-
-    function closeLightbox(e) {
-      if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
-        document.getElementById('lightbox').classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
-    });
   </script>
 </body>
 </html>

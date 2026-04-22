@@ -994,7 +994,7 @@
         <div class="work-overlay"><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">DANI&amp;FERNANDINHO</p>
-          <p class="work-location">Praia do Rosa, SC</p>
+          <p class="work-location">Praia do Rosa, Santa Catarina</p>
         </div>
       </div>
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
@@ -1075,7 +1075,10 @@
     </div>
 
     <!-- Formulário via Formspree: crie conta em formspree.io e substitua SEU_ID -->
-    <form class="contact-form reveal" action="https://formspree.io/f/SEU_ID" method="POST">
+    <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="de9ac01b-67d4-45dc-9ca7-83751ba3ddd5" />
+      <input type="hidden" name="subject" value="Novo contato — Münchow Studio" />
+      <input type="hidden" name="redirect" value="false" />
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="nome">Seu nome</label>

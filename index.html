@@ -772,6 +772,76 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* LIGHTBOX EM BREVE */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(28,26,22,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox-box {
+      text-align: center;
+      padding: 64px 56px;
+      max-width: 480px;
+      transform: translateY(16px);
+      transition: transform 0.35s ease;
+    }
+    .lightbox.active .lightbox-box {
+      transform: translateY(0);
+    }
+    .lightbox-eyebrow {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--burlap);
+      margin-bottom: 24px;
+    }
+    .lightbox-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .lightbox-title em { font-style: italic; color: var(--burlap); }
+    .lightbox-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(237,232,222,0.55);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .lightbox-close {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: transparent;
+      border: 1px solid rgba(237,232,222,0.3);
+      padding: 13px 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: var(--sans);
+    }
+    .lightbox-close:hover {
+      border-color: rgba(237,232,222,0.7);
+      background: rgba(237,232,222,0.06);
+    }
+
     /* MOBILE */
     @media (max-width: 860px) {
       nav { padding: 22px 24px; }
@@ -1008,6 +1078,16 @@
     </form>
   </section>
 
+  <!-- LIGHTBOX EM BREVE -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-box">
+      <p class="lightbox-eyebrow">Portfólio</p>
+      <h2 class="lightbox-title">Galeria em<br><em>construção.</em></h2>
+      <p class="lightbox-sub">Em breve as histórias completas estarão aqui. Enquanto isso, entre em contato — será um prazer conversar sobre o seu casamento.</p>
+      <button class="lightbox-close" onclick="closeLightbox()">Fechar</button>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <a href="/" class="footer-logo">
@@ -1038,9 +1118,24 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
     reveals.forEach(el => observer.observe(el));
 
-    // Stagger work items
     document.querySelectorAll('.work-item').forEach((item, i) => {
       item.style.transitionDelay = `${i * 0.07}s`;
+    });
+
+    function openLightbox() {
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
     });
   </script>
 </body>

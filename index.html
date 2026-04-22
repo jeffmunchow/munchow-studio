@@ -1081,11 +1081,10 @@
       </div>
     </div>
 
-    <!-- Formulário via Formspree: crie conta em formspree.io e substitua SEU_ID -->
-    <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+    <!-- Formulário Web3Forms -->
+    <form class="contact-form reveal" id="contact-form">
       <input type="hidden" name="access_key" value="de9ac01b-67d4-45dc-9ca7-83751ba3ddd5" />
       <input type="hidden" name="subject" value="Novo contato — Münchow Studio" />
-      <input type="hidden" name="redirect" value="false" />
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="nome">Seu nome</label>
@@ -1117,6 +1116,13 @@
         </svg>
       </button>
     </form>
+
+    <div class="contact-thanks" id="contact-thanks" style="display:none;">
+      <p class="contact-label">Mensagem enviada</p>
+      <h2 class="contact-title" style="font-size: clamp(28px,3vw,48px);">Obrigado<br>pelo <em>contato.</em></h2>
+      <p class="contact-sub">Recebi sua mensagem e responderei em breve — pessoalmente.</p>
+      <p class="about-sig" style="margin-top:24px;">— Jeff Münchow</p>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -1160,6 +1166,22 @@
         if (v.length >= 3) v = v.substring(0,2) + '/' + v.substring(2);
         if (v.length >= 6) v = v.substring(0,5) + '/' + v.substring(5);
         this.value = v;
+      });
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const data = new FormData(this);
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        if (response.ok) {
+          contactForm.style.display = 'none';
+          document.getElementById('contact-thanks').style.display = 'block';
+        }
       });
     }
 

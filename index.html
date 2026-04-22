@@ -718,6 +718,13 @@
       resize: none;
       width: 100%;
     }
+    .form-input:-webkit-autofill,
+    .form-input:-webkit-autofill:hover,
+    .form-input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0px 1000px var(--bg) inset;
+      -webkit-text-fill-color: var(--slate);
+      transition: background-color 5000s ease-in-out 0s;
+    }
     .form-input::placeholder,
     .form-textarea::placeholder {
       color: var(--olive-mid);
@@ -1092,7 +1099,7 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="data">Data do casamento</label>
-          <input class="form-input" type="text" id="data" name="data" placeholder="Dia, mês e ano" />
+          <input class="form-input" type="text" id="data" name="data" placeholder="DD/MM/AAAA" maxlength="10" autocomplete="off" inputmode="numeric" />
         </div>
         <div class="form-group">
           <label class="form-label" for="local">Local</label>
@@ -1145,6 +1152,16 @@
     document.querySelectorAll('.work-item').forEach((item, i) => {
       item.style.transitionDelay = `${i * 0.07}s`;
     });
+
+    const dataInput = document.getElementById('data');
+    if (dataInput) {
+      dataInput.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '').substring(0, 8);
+        if (v.length >= 3) v = v.substring(0,2) + '/' + v.substring(2);
+        if (v.length >= 6) v = v.substring(0,5) + '/' + v.substring(5);
+        this.value = v;
+      });
+    }
 
     function openLightbox(el) {
       const overlay = el.querySelector('.work-overlay');

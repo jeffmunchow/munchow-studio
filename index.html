@@ -959,7 +959,7 @@
       -->
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776378861/_A7R9820_csyeot.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
+        <div class="work-overlay" ><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">LAURA&amp;DIEGO</p>
           <p class="work-location">Islândia</p>
@@ -967,7 +967,7 @@
       </div>
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776882905/_0001267_s7zw0f.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
+        <div class="work-overlay" ><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">RAQUEL&amp;MICHI</p>
           <p class="work-location">Baviera, Alemanha</p>
@@ -975,7 +975,7 @@
       </div>
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776884897/DasRu%CC%88ebezahl-20_xwsatk.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
+        <div class="work-overlay" ><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">FLORIAN&amp;KATJA</p>
           <p class="work-location">Schwangau, Alemanha</p>
@@ -983,7 +983,7 @@
       </div>
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776883268/Cate-e-Louis-Wedding-669_jju22r.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
+        <div class="work-overlay" ><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">CATE&amp;LOUIS</p>
           <p class="work-location">Outeiro das Brisas, Bahia</p>
@@ -998,7 +998,7 @@
       </div>
       <div class="work-item" onclick="openLightbox(this)" style="cursor:pointer;">
         <div class="work-bg" style="background-image: url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776884265/Betina-e-Iason-Wedding-813_eiml3c.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="work-overlay" onclick="this.classList.remove('visible')"><span class="work-overlay-text">Em construção</span></div>
+        <div class="work-overlay" ><span class="work-overlay-text">Em construção</span></div>
         <div class="work-info">
           <p class="work-name">BETINA&amp;IASON</p>
           <p class="work-location">Missões, Rio Grande do Sul</p>
@@ -1144,8 +1144,21 @@
 
     function openLightbox(el) {
       const overlay = el.querySelector('.work-overlay');
-      if (overlay) overlay.classList.add('visible');
+      if (overlay) {
+        if (overlay.classList.contains('visible')) {
+          overlay.classList.remove('visible');
+        } else {
+          document.querySelectorAll('.work-overlay.visible').forEach(o => o.classList.remove('visible'));
+          overlay.classList.add('visible');
+        }
+      }
     }
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.work-item')) {
+        document.querySelectorAll('.work-overlay.visible').forEach(o => o.classList.remove('visible'));
+      }
+    });
   </script>
 </body>
 </html>

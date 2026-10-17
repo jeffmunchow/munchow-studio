@@ -116,9 +116,8 @@
 
     .hero{position:relative;height:100svh;min-height:640px;overflow:hidden}
     .hero-left{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 56px;height:100%}
-    .hero-img{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776352159/_A7R0235_mlgvx6.jpg');background-size:cover;background-position:center bottom;transform:scale(1.04);animation:slowzoom 22s ease-in-out infinite alternate}
+    .hero-img{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/dptgycx3x/image/upload/v1776352159/_A7R0235_mlgvx6.jpg');background-size:cover;background-position:center bottom}
     .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,26,22,.65) 0%,rgba(28,26,22,.15) 50%,transparent 100%)}
-    @keyframes slowzoom{from{transform:scale(1.04)}to{transform:scale(1)}}
     .hero-eyebrow{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--cream);margin-bottom:22px;opacity:0;animation:fup 1s .4s forwards}
     .hero-title{font-family:var(--serif);font-size:clamp(46px,5.6vw,88px);font-weight:400;line-height:1.1;letter-spacing:-.01em;color:var(--cream);margin-bottom:30px;opacity:0;animation:fup 1s .65s forwards}
     .hero-title em{font-style:italic}
@@ -362,10 +361,16 @@
       </div>
       <div class="form-row">
         <div class="form-group">
+          <label class="form-label" for="telefone">Telefone / WhatsApp</label>
+          <input class="form-input" type="tel" id="telefone" name="telefone" placeholder="(DDD) XXXXX-XXXX" autocomplete="tel" inputmode="tel" />
+        </div>
+        <div class="form-group">
           <label class="form-label" for="data">Data do casamento</label>
           <input class="form-input" type="text" id="data" name="data" placeholder="DD/MM/AAAA" maxlength="10" autocomplete="off" inputmode="numeric" />
         </div>
-        <div class="form-group">
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="grid-column:span 2">
           <label class="form-label" for="local">Local</label>
           <input class="form-input" type="text" id="local" name="local" placeholder="Cidade ou destino" autocomplete="off" />
         </div>
